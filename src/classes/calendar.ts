@@ -6,14 +6,6 @@ if (
     throw new Error('Invalid/Missing environment variable: "BASE_API_URL"')
 }
 
-export interface EventType {
-    id?: ObjectId,
-    title?: string,
-    start?: Date,
-    end?: Date,
-    extendedProps?: any
-}
-
 enum statusLevels {
     OK = "OK",
     error = "error",

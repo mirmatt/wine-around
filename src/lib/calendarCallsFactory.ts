@@ -1,4 +1,5 @@
-import { EventType, classMapping } from "../types/calendar"
+import EventType from "../types/eventType"
+import { classMapping } from "../classes/calendar"
 
 export default async function calendarCallsFactory(eventData : EventType, type : string) {
     const callObject = new classMapping[type](
@@ -10,5 +11,6 @@ export default async function calendarCallsFactory(eventData : EventType, type :
     )
     let resp = await callObject.call()
     resp = await resp.json()
+    console.log(resp)
     return resp
 }

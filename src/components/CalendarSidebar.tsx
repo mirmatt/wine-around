@@ -5,9 +5,11 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import CalendarViewWeekIcon from '@mui/icons-material/CalendarViewWeek';
 import TodayIcon from '@mui/icons-material/Today';
 
+interface SidebarProps {
+    setCalendar: Function
+}
 
-
-export default function CalendarSidebar({setCalendar}) {
+const CalendarSidebar:React.FC<SidebarProps> = ({setCalendar}) => {
 
     const sidebarIcons = [
         {
@@ -53,3 +55,5 @@ export default function CalendarSidebar({setCalendar}) {
             </Drawer>
     )
 }
+
+export default CalendarSidebar

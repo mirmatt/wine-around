@@ -1,4 +1,4 @@
-import clientPromise from "../lib/mongodb";
+import clientPromise from "src/lib/mongodb";
 
 export default async (request, response) => {
     try {
