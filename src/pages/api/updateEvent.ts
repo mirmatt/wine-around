@@ -1,6 +1,7 @@
-import clientPromise from "src/lib/mongodb";
+import clientPromise from "../../lib/mongodb";
+import { Request, Response } from "../../types/callTypes";
 
-export default async (request, response) => {
+export default async (request: Request, response: Response) => {
 	try {
 		const { ObjectId } = require("mongodb")
 		const client = await clientPromise;
@@ -11,13 +12,16 @@ export default async (request, response) => {
 			{ _id: ObjectId(reqBody._id) },
 			{
 				$set: {
-					deleted: !reqBody.deleted
+					eventName: reqBody.eventName,
+					startDate: reqBody.startDate,
+					endDate: reqBody.endDate,
 				}
 			}
 		)
-		console.log(`Row ${reqBody._id} set to ${!reqBody.deleted}`)
+
+		console.log(`Updated ${post.modifiedCount} row with _id : ${reqBody._id}`)
 		response.json(post);
-	} catch (e) {
+	} catch (e:any) {
 		console.error(e);
 		throw new Error(e).message;
 	}

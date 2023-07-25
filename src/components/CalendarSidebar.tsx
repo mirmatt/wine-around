@@ -1,29 +1,34 @@
 
-import React from 'react'
-import { Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
+import React, {RefObject} from 'react'
+import { Divider, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import CalendarViewWeekIcon from '@mui/icons-material/CalendarViewWeek';
 import TodayIcon from '@mui/icons-material/Today';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import FullCalendar from "@fullcalendar/react";
 
 interface SidebarProps {
-    setCalendar: Function
+    calendar: RefObject<FullCalendar>,
+    isOpen: boolean,
+    drawerWidth: number,
+    openDialog: Function
 }
 
-const CalendarSidebar:React.FC<SidebarProps> = ({setCalendar}) => {
+const CalendarSidebar:React.FC<SidebarProps> = ({calendar, isOpen, drawerWidth, openDialog}) => {
 
     const sidebarIcons = [
         {
-            "label" : "month",
+            "label" : "Mese",
             "component" : <CalendarMonthIcon/>,
             "calendarView" : "dayGridMonth"
         },
         {
-            "label" : "week",
+            "label" : "Settimana",
             "component" : <CalendarViewWeekIcon/>,
             "calendarView" : "timeGridWeek"
         },
         {
-            "label" : "day",
+            "label" : "Giorno",
             "component" : <TodayIcon/>,
             "calendarView" : "timeGridDay"
         },
@@ -32,16 +37,21 @@ const CalendarSidebar:React.FC<SidebarProps> = ({setCalendar}) => {
     return (
         <Drawer
                 sx={{
-                    width: 240,
-                    flexShrink: 0
-                }}
-                variant='permanent'
+                    width: drawerWidth,
+                    flexShrink: 0,
+                    '& .MuiDrawer-paper': {
+                      width: drawerWidth,
+                      boxSizing: 'border-box',
+                    },
+                  }}
+                variant='persistent'
                 anchor='left'
+                open={isOpen}
             >
                 <List>
                     {sidebarIcons.map((entryMap) => {
                         return (<ListItem key={entryMap.label} disablePadding onClick={() => {
-                                setCalendar(entryMap.calendarView)
+                                calendar.current?.getApi().changeView(entryMap.calendarView)
                             }}>
                           <ListItemButton>
                             <ListItemIcon>
@@ -51,6 +61,22 @@ const CalendarSidebar:React.FC<SidebarProps> = ({setCalendar}) => {
                           </ListItemButton>
                         </ListItem>)
                     })}
+                    <Divider/>
+                    <ListItem key="new-event" disablePadding onClick={() => {
+                        openDialog(
+                            undefined,
+                            undefined,
+                            undefined,
+                            undefined,
+                        )
+                    }}>
+                        <ListItemButton>
+                            <ListItemIcon>
+                                <AddCircleOutlineIcon/>
+                            </ListItemIcon>
+                            <ListItemText primary="Nuovo Evento"/>
+                        </ListItemButton>
+                    </ListItem>
                 </List>
             </Drawer>
     )

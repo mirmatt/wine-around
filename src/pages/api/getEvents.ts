@@ -1,6 +1,7 @@
-import clientPromise from "src/lib/mongodb";
+import clientPromise from "../../lib/mongodb";
+import { Request, Response } from "../../types/callTypes";
 
-export default async (request, response) => {
+export default async (request: Request, response: Response) => {
     try {
         const client = await clientPromise;
         const db = client.db("wineAround")
@@ -19,7 +20,7 @@ export default async (request, response) => {
                 deleted : ev.deleted
             }
         }))
-    } catch (e) {
+    } catch (e:any) {
         console.error(e)
     }
 }

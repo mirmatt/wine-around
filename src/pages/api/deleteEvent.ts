@@ -1,6 +1,7 @@
-import clientPromise from "src/lib/mongodb";
+import clientPromise from "../../lib/mongodb";
+import { Request, Response } from "../../types/callTypes";
 
-export default async (request, response) => {
+export default async (request: Request, response: Response) => {
 	try {
 		const { ObjectId } = require("mongodb")
 		const client = await clientPromise;
@@ -10,9 +11,9 @@ export default async (request, response) => {
 		const post = await db.collection("events").deleteOne(
 			{ _id: ObjectId(reqBody._id) }
 		)
-		console.log(`Deleted ${post.modifiedCount} row with _id : ${reqBody._id}`)
+		console.log(`Deleted ${post.deletedCount} rows with _id : ${reqBody._id}`)
 		response.json(post);
-	} catch (e) {
+	} catch (e:any) {
 		console.error(e);
 		throw new Error(e).message;
 	}
