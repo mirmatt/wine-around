@@ -1,0 +1,9 @@
+.calendar_mainClass {
+	max-height: 70vh;
+	background-color: #121212;
+	color: white;
+}
+
+.deleted_event {
+	background-color: lightgray;
+}

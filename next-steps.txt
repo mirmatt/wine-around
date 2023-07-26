@@ -1,0 +1,4 @@
+- Inserire un error handling
+    - Già presenti le variabili esposte da tanstack, c'è giusto bisogno di inserire le alert rilevanti
+- Aggiungere descrizione agli eventi
+- Aggiungere Export eventi
