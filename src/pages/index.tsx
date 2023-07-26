@@ -1,6 +1,6 @@
 import { useState, useRef, RefObject, useEffect } from "react";
 import Head from "next/head";
-import CalendarContainer from "./CalendarContainer";
+import CalendarContainer from "../components/CalendarContainer";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Grid from "@mui/material/Grid"; // Grid version 1
@@ -50,7 +50,7 @@ export default function Home({}) {
 				<title>Calendar WineAround App</title>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-			<QueryClientProvider client={clientQuery}>
+			<QueryClientProvider client={clientQuery} contextSharing={true}>
 				<ThemeProvider theme={muiTheme}>
 					<Grid>
 						{openDialog && (

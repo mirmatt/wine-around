@@ -151,7 +151,9 @@ const CreateModal: React.FC<ModalProps> = ({ open, setOpen, eventData }) => {
 				></TextField>
 				<Divider />
 				<LocalizationProvider dateAdapter={AdapterLuxon}>
-					<Grid className={modalCss.timepicker_container} container spacing={2}>
+					<Grid className={modalCss.timepicker_container} container spacing={2} sx={{
+                        marginTop: "20px"
+                    }}>
 						<Grid item xs={6}>
 							<DateTimePicker
 								className={modalCss.timepicker_start}

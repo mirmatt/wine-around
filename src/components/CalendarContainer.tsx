@@ -5,8 +5,8 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Container from "@mui/material/Container";
 
 import { a1, af } from "@fullcalendar/core/internal-common";
-import DesktopCalendar from "../components/DesktopCalendar";
-import MobileCalendar from "../components/MobileCalendar";
+import DesktopCalendar from "./DesktopCalendar";
+import MobileCalendar from "./MobileCalendar";
 
 interface CalendarProps {
 	getRef: Function;
